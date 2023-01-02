@@ -6,7 +6,13 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint --ext .jsx --ext .jsx ./src",
+    "lint:fix": "eslint --fix --ext .jsx --ext .jsx ./",
+    "format": "prettier --check ./src",
+    "write": "prettier --write ./src",
+    "prepare": "husky install",
+    "test": "echo hello world"
   },
   "dependencies": {
     "expo": "~47.0.9",
@@ -15,7 +21,26 @@
     "react-native": "0.70.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1"
   },
-  "private": true
+  "private": true,
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scc,md}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
