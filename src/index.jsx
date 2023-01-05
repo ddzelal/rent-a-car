@@ -1,12 +1,20 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import useCachedResources from './hooks/useCachedResources';
+import Navigation from './navigation';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const App = () => {
+  const queryClient = new QueryClient();
+  const isLoadingComplete = useCachedResources();
+
   return (
-    <View>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <>
+      {isLoadingComplete ? (
+        <QueryClientProvider client={queryClient}>
+          <Navigation />
+        </QueryClientProvider>
+      ) : null}
+    </>
   );
 };
 
