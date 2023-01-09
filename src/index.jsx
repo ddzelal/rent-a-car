@@ -2,6 +2,9 @@ import React from 'react';
 import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -11,7 +14,15 @@ const App = () => {
     <>
       {isLoadingComplete ? (
         <QueryClientProvider client={queryClient}>
-          <Navigation />
+          <SafeAreaProvider>
+            <KeyboardAvoidingView
+              style={{ flex: 1 }}
+              behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+              <Navigation />
+              <StatusBar hidden />
+            </KeyboardAvoidingView>
+          </SafeAreaProvider>
         </QueryClientProvider>
       ) : null}
     </>

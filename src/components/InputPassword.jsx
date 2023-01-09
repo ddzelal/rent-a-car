@@ -1,15 +1,24 @@
-import React from 'react';
-import { Image, StyleSheet, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Image,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import colors from '../theme/ColorPalette';
 
-export const Input = ({
+export const InputPassword = ({
   setState,
   state,
   type,
   icon,
   placeholder,
-  isCorrect = true,
+  iconEnd,
+  isCorrect,
 }) => {
+  const [visibility, setVisibility] = useState(true);
+
   return (
     <View
       style={isCorrect ? styles.inputContainer : styles.dangerInputContainer}
@@ -20,8 +29,12 @@ export const Input = ({
           style={styles.textInput}
           onChangeText={(text) => setState({ ...state, [type]: text })}
           placeholder={placeholder}
+          secureTextEntry={visibility}
         />
       </View>
+      <TouchableOpacity onPress={() => setVisibility(!visibility)}>
+        <Image style={styles.iconEnd} source={iconEnd} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -29,6 +42,7 @@ export const Input = ({
 const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
+
     width: '100%',
     height: 52,
     flexDirection: 'row',
@@ -49,13 +63,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   textContainer: {
-    alignItems: 'center',
+    alignContent: 'center',
     justifyContent: 'center',
     marginLeft: 20,
     flex: 1,
   },
+  iconEnd: {
+    marginRight: 20,
+  },
   textInput: {
-    width: '100%',
     flex: 1,
   },
 });

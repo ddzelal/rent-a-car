@@ -19,7 +19,11 @@ const SplashScreen = () => {
             margin: 18,
           }}
         >
-          <Typography typeText={text.H4} color={colors.DARK_200}>
+          <Typography
+            textAlign="center"
+            typeText={text.H4}
+            color={colors.DARK_200}
+          >
             Transportation License Portal
           </Typography>
         </View>
