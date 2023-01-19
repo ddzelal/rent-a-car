@@ -13,6 +13,7 @@ import pass from '../../assets/icons/lock.png';
 import eyeInv from '../../assets/icons/eyeInvisible.png';
 import { InputPassword } from '../components/InputPassword';
 import Button from '../components/Button';
+import { getData, storeData } from '../utils/asyncStorageService';
 import { fetchLogin } from '../../api';
 import ButtonLight from '../components/ButtonLight';
 
@@ -29,9 +30,15 @@ const Login = () => {
 
   const goLogin = async () => {
     const data = await fetchLogin(user);
-    if (data?.status) navigation.navigate('Home');
+    if (data?.status) {
+      await storeData('TOKEN', data?.data?.access_token);
+      await storeData('REFRESH', data?.data?.refresh_token);
+      navigation.navigate('Home');
+      await getData('TOKEN');
+    } else {
+      setIsCorrect(false);
+    }
     if (data === 403) navigation.navigate('VerifyAccount');
-    else setIsCorrect(false);
   };
   return (
     <LinearGradient

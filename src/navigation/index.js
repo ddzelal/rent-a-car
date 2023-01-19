@@ -15,9 +15,9 @@ import VerifyAccount from '../screens/VerifyAccount';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const { data, isLoading } = useQuery('token', async () => getData('TOKEN'));
-  const initialRouteName = data ? 'Login' : 'Home';
-  // when finish login change after line
+  const { data, isLoading } = useQuery('getData', async () => getData('TOKEN'));
+
+  const initialRouteName = data ? 'Home' : 'Login';
 
   return (
     <>

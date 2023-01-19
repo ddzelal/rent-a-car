@@ -20,7 +20,7 @@ const App = () => {
               behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
               <Navigation />
-              <StatusBar hidden />
+              <StatusBar translucent backgroundColor="transparent" />
             </KeyboardAvoidingView>
           </SafeAreaProvider>
         </QueryClientProvider>
