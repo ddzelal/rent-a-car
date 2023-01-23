@@ -11,6 +11,7 @@ import VerificationCode from '../screens/VerificationCode';
 import ResetPassword from '../screens/ResetPassword';
 import CreateAnAccount from '../screens/CreateAnAccount';
 import VerifyAccount from '../screens/VerifyAccount';
+import Profile from '../screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const Navigation = () => {
             <Stack.Screen name="ResetPassword" component={ResetPassword} />
             <Stack.Screen name="CreateAnAccount" component={CreateAnAccount} />
             <Stack.Screen name="VerifyAccount" component={VerifyAccount} />
+            <Stack.Screen name="Profile" component={Profile} />
           </Stack.Navigator>
         </NavigationContainer>
       )}

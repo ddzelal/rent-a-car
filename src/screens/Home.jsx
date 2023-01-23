@@ -11,28 +11,14 @@ import { dataHome } from '../common/homeOptions';
 import { getData, removeValue } from '../utils/asyncStorageService';
 import { useQuery } from 'react-query';
 import SplashScreen from './SplashScreen';
-import { getCurrentUser } from '../../api';
 
 const Home = () => {
   const navigation = useNavigation();
 
-  const { data, isLoading, isSuccess } = useQuery('getData', async () =>
-    getData('TOKEN'),
-  );
-
-  // const getUser = useQuery('getUser', async () => getCurrentUser(), {
-  // enabled: data?.isSuccess,
-  // });
-
-  // console.log(getUser?.data, 'geTUser');
+  const { isLoading } = useQuery('getData', async () => getData('TOKEN'));
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
-    getCurrentUser()
-      .then((res) => {
-        console.log(res, 'ppppppppppppppppppppp');
-      })
-      .catch((error) => console.log(error, 'EROR12345675678'));
   }, []);
 
   const handleLogout = async () => {

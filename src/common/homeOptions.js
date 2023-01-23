@@ -16,24 +16,25 @@ export const dataHome = [
     title: 'Register',
     backgroundColor: '#F8EFE0',
     iconPath: register,
-    componentPath: 'NewVehicleOne',
+    // componentPath: 'NewVehicleOne',
   },
   {
     title: 'Traffic Fines',
     backgroundColor: '#E1F1E8',
     iconPath: traffic,
-    componentPath: 'TrafficFines',
+    // componentPath: 'TrafficFines',
   },
   {
     title: 'License Renewal',
     backgroundColor: '#DDEDFF',
     iconPath: licenseRenewal,
-    componentPath: 'LicenseRenewal',
+    // componentPath: 'LicenseRenewal',
   },
   {
     title: 'Profile',
     backgroundColor: '#FFEDF3',
     iconPath: user,
+    componentPath: 'Profile',
   },
   {
     title: 'Scan QR',

@@ -2,9 +2,12 @@ import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Typography from './Typography';
 import typeText from '../theme/TypographyTypes';
-const Card = ({ title, backgroundColor, iconPath }) => {
+import { useNavigation } from '@react-navigation/native';
+const Card = ({ title, backgroundColor, iconPath, componentPath = 'Home' }) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate(`${componentPath}`)}>
       <View style={styled.mainContainer}>
         <View
           style={{
