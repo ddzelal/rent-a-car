@@ -16,7 +16,9 @@ import Profile from '../screens/Profile';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const { data, isLoading } = useQuery('getData', async () => getData('TOKEN'));
+  const { data, isLoading } = useQuery('getData', async () =>
+    getData('USER_EMAIL'),
+  );
 
   const initialRouteName = data ? 'Home' : 'Login';
 

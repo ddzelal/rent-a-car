@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { getData, storeData } from '../src/utils/asyncStorageService';
 
-const homeIp = '192.168.1.6:4004';
-const officeIp = '192.168.0.193:4004';
+// const homeIp = '192.168.1.6:4004';
+const officeIp = '192.168.0.193:3000';
 
-const baseURL = `http://${homeIp}/v1/`;
+const baseURL = `http://${officeIp}/api/`;
 
 export const instance = axios.create({
   baseURL,
@@ -33,8 +33,6 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    console.log('error.response.status', error.response.status);
-    console.log('originalRequest._retry', originalRequest._retry);
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = await getData('REFRESH');

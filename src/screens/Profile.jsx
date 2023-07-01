@@ -7,13 +7,25 @@ import { useQuery } from 'react-query';
 import { getCurrentUser } from '../../api';
 import typeText from '../theme/TypographyTypes';
 import colors from '../theme/ColorPalette';
+import { getData } from '../utils/asyncStorageService';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const { data: dataEmail, isSuccess } = useQuery('getData', async () =>
+    getData('USER_EMAIL'),
+  );
 
-  const { data, isLoading } = useQuery('getUser', async () => getCurrentUser());
-
-  console.log(data, 'data u profile');
+  const { data, isLoading } = useQuery(
+    'getUser',
+    async () => {
+      if (isSuccess) {
+        return getCurrentUser(dataEmail);
+      }
+    },
+    {
+      enabled: isSuccess,
+    },
+  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,7 +43,7 @@ const Profile = () => {
             <View>
               <Image source={userImage} />
             </View>
-            <Typography typeText={typeText.H4}>{data?.name}</Typography>
+            <Typography typeText={typeText.H4}>{data?.username}</Typography>
             <Typography typeText={typeText.P3}>Serbia</Typography>
           </View>
           <View style={styled.infoContainer}>
@@ -67,7 +79,7 @@ const Profile = () => {
                 typeText={typeText.H5}
                 color={colors.DARK_100}
               >
-                Fines per vehicle
+                User details
               </Typography>
             </View>
             <View style={styled.finesCardContainer}>
@@ -77,27 +89,27 @@ const Profile = () => {
                   color={colors.DARK_200}
                   typeText={typeText.P4}
                 >
-                  BMW M4
+                  full name:
                 </Typography>
                 <Typography
                   textAlign="left"
                   color={colors.DARK_200}
                   typeText={typeText.P4}
                 >
-                  BMW X7
+                  email:
                 </Typography>
               </View>
               <View style={styled.finesCardText}>
                 <Typography color={colors.DARK_100} typeText={typeText.H6}>
-                  : R172.00
+                  {data?.fullName}
                 </Typography>
                 <Typography color={colors.DARK_100} typeText={typeText.H6}>
-                  : R172.00
+                  {data?.email}
                 </Typography>
               </View>
             </View>
           </View>
-          <View style={styled.drivingContainer}>
+          {/* <View style={styled.drivingContainer}>
             <View>
               <View style={{ marginLeft: 10 }}>
                 <Typography
@@ -113,7 +125,7 @@ const Profile = () => {
                 <View style={styled.finesCardText}></View>
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
       )}
     </>

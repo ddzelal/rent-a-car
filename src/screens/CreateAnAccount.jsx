@@ -10,7 +10,6 @@ import eyeInv from '../../assets/icons/eyeInvisible.png';
 import { useNavigation } from '@react-navigation/native';
 import userIcon from '../../assets/icons/userIcon.png';
 import sms from '../../assets/icons/sms.png';
-import phone from '../../assets/icons/call.png';
 import { Input } from '../components/Input';
 import { createAnAccountAPI } from '../../api';
 
@@ -24,18 +23,12 @@ const CreateAnAccount = () => {
   const [isCorrect, setIsCorrect] = useState(true);
   const [user, setUser] = useState({
     email: '',
-    name: '',
-    username: '',
+    fullName: '',
     password: '',
   });
 
   const handleSignUp = async () => {
-    if (
-      user.email.length &&
-      user.name.length &&
-      user.username.length &&
-      user.password.length > 3
-    ) {
+    if (user.email.length && user.fullName.length && user.password.length > 3) {
       await createAnAccountAPI(user);
       navigation.navigate('VerifyAccount');
     } else {
@@ -58,18 +51,10 @@ const CreateAnAccount = () => {
       <View style={{ marginTop: 30 }}>
         <Input
           icon={userIcon}
-          placeholder="First name"
+          placeholder="Full name"
           setState={setUser}
           state={user}
-          type="name"
-          isCorrect={isCorrect}
-        />
-        <Input
-          icon={userIcon}
-          placeholder="Last name"
-          setState={setUser}
-          state={user}
-          type="username"
+          type="fullName"
           isCorrect={isCorrect}
         />
         <Input
@@ -79,13 +64,6 @@ const CreateAnAccount = () => {
           state={user}
           type="email"
           isCorrect={isCorrect}
-        />
-        <Input
-          icon={phone}
-          placeholder="Phone number"
-          setState={setUser}
-          state={user}
-          type="phoneNumber"
         />
         <InputPassword
           icon={pass}
@@ -98,7 +76,7 @@ const CreateAnAccount = () => {
         />
       </View>
       <TouchableOpacity onPress={handleSignUp}>
-        <Button title="Update new password" />
+        <Button title="Sign up" />
       </TouchableOpacity>
     </View>
   );

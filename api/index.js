@@ -7,7 +7,7 @@ import { auth, instance } from './apiManager';
 export const fetchLogin = async (body) => {
   console.log('tu sam', body);
   try {
-    const { data } = await auth('auth/login', {
+    const { data } = await auth('auth', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -54,8 +54,9 @@ export const fetchChangeNewPassword = async (body) => {
 };
 
 export const createAnAccountAPI = async (body) => {
+  console.log(body);
   try {
-    const { data } = await auth('auth/signup', {
+    const { data } = await auth('users', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -69,9 +70,10 @@ export const createAnAccountAPI = async (body) => {
   }
 };
 
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (email) => {
+  console.log(email, 'sta radis to');
   try {
-    const { data } = await instance('user/current', {
+    const { data } = await instance(`users/${email}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

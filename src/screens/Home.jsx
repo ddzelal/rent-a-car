@@ -15,7 +15,7 @@ import SplashScreen from './SplashScreen';
 const Home = () => {
   const navigation = useNavigation();
 
-  const { isLoading } = useQuery('getData', async () => getData('TOKEN'));
+  const { isLoading } = useQuery('getData', async () => getData('USER_EMAIL'));
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -23,7 +23,8 @@ const Home = () => {
 
   const handleLogout = async () => {
     try {
-      await removeValue('TOKEN');
+      await removeValue('USER_EMAIL');
+      await removeValue('USER_FULLNAME');
       navigation.navigate('Login');
     } catch (error) {
       console.log(error);
